@@ -17,3 +17,20 @@ export async function insertData(firstName, lastName, email, password, dob, user
             return { status: "error", message: error.response?.data?.message || "Something went wrong" };
     }
 }
+
+// Login user
+export async function loginUser(email, password) {
+  try {
+    const loginUrl = `${config.serverUrl}/auth/login`;
+    const body = { email, password };
+    const response = await axios.post(loginUrl, body);
+    return {
+      status: 'success',
+      ...response.data
+    };
+  } catch (error) {
+    console.error("Login error:", error.response?.data || error.message);
+    return { status: "error", message: error.response?.data?.message || "Invalid credentials" };
+  }
+}
+

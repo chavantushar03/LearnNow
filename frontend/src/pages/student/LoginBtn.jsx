@@ -5,7 +5,6 @@ function LoginBtn() {
   return (
     <div>
       <Link to="/register" className="text-white">Register</Link>
-      
     </div>
 
   )

@@ -6,7 +6,6 @@ import { BookOpen, Home, PlusCircle, Users } from 'lucide-react';
 
 const Sidebar = () => {
   const { isTeacher } = useContext(AppContext);
-
  const menuItems = [
   { name: 'Dashboard', path: '/teacher', icon: <Home size={24} /> },
   { name: 'Add Course', path: '/teacher/add-course', icon: <PlusCircle size={24} /> },
@@ -14,9 +13,9 @@ const Sidebar = () => {
   { name: 'Studens Enrolled', path: '/teacher/student-enrolled', icon: <Users size={24} /> },
 ];
 
-  return (
-    isTeacher && (
-      <div
+
+return (
+       <div
         className="md:w-64 w-16 min-h-screen flex flex-col py-2 text-base"
         style={{
           backgroundColor: 'var(--color-bg)',
@@ -45,9 +44,10 @@ const Sidebar = () => {
             <p className="md:block hidden">{item.name}</p>
           </NavLink>
         ))}
-      </div>
-    )
-  );
+  
+  </div>
+);
+ 
 };
 
 export default Sidebar;
