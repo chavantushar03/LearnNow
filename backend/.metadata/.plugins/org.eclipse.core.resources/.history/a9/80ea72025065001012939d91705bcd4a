@@ -1,0 +1,5 @@
+package com.learnnow.dto;
+
+public class RegisterRequestDTO {
+
+}

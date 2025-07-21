@@ -1,0 +1,12 @@
+package com.learnnow.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Data
+public class LoginResponseDTO {
+    private String token;
+    private String email;
+    private String message;
+}

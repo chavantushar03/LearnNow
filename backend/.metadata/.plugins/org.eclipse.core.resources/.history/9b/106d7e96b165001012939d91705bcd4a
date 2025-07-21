@@ -1,0 +1,5 @@
+package com.learnnow.exception;
+
+public class ApiException {
+
+}
