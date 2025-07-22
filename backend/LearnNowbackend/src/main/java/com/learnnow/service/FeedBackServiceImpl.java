@@ -56,10 +56,14 @@ public class FeedBackServiceImpl implements FeedBackService{
 	@Override
 	public void deleteFeedBack(Long id) {
 		// TODO Auto-generated method stub
-		if (!feedBackDao.existsById(id)) {
-            throw new RuntimeException("Feedback not found with id: " + id);
-        }
-		feedBackDao.deleteById(id);
+//		if (!feedBackDao.existsById(id)) {
+//            throw new RuntimeException("Feedback not found with id: " + id);
+//        }
+//		feedBackDao.deleteById(id);
+		FeedBack feedback = feedBackDao.findById(id)
+	            .orElseThrow(() -> new RuntimeException("Feedback not found with id: " + id));
+		feedback.setActive(false);
+		feedBackDao.save(feedback);
 	}
 
 }

@@ -36,7 +36,7 @@ public class FeedBackController {
 	        return ResponseEntity.ok("Feedback deleted successfully");
 	    }
 	 @PostMapping
-	 public ResponseEntity<FeedBackDTO> addFeedBack(@Valid@RequestBody FeedBackDTO dto) {
+	 public ResponseEntity<FeedBackDTO> addFeedBack(@Valid @RequestBody FeedBackDTO dto) {
 	     return ResponseEntity.ok(feedBackService.addFeedBack(dto));
 	 }
 
