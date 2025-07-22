@@ -1,0 +1,80 @@
+package com.learnnow.security;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.crypto.SecretKey;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
+
+import com.learnnow.pojo.UserEntity;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+
+@Component
+public class JwtUtils {
+
+    @Value("${SECRET_KEY}")
+    private String jwtSecret;
+
+    @Value("${EXP_TIMEOUT}")
+    private int jwtExpirationMs;
+
+    private SecretKey key;
+
+    @PostConstruct
+    public void init() {
+        key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
+    }
+
+    public String generateJwtToken(Authentication authentication) {
+        UserEntity user = (UserEntity) authentication.getPrincipal();
+
+        return Jwts.builder()
+                .subject(user.getEmail())
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
+                .claim("authorities", getAuthoritiesInString(user.getAuthorities()))
+                .signWith(key, Jwts.SIG.HS256)
+                .compact();
+    }
+
+    public Claims validateJwtToken(String token) {
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public String getUsernameFromJwtToken(Claims claims) {
+        return claims.getSubject();
+    }
+
+    private List<String> getAuthoritiesInString(Collection<? extends GrantedAuthority> authorities) {
+        return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+    }
+
+    public List<GrantedAuthority> getAuthoritiesFromClaims(Claims claims) {
+        List<String> roles = claims.get("authorities", List.class);
+        return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    }
+
+    public Authentication buildAuthenticationFromJWT(String token) {
+        Claims claims = validateJwtToken(token);
+        String email = getUsernameFromJwtToken(claims);
+        List<GrantedAuthority> authorities = getAuthoritiesFromClaims(claims);
+
+        return new UsernamePasswordAuthenticationToken(email, null, authorities);
+    }
+}
