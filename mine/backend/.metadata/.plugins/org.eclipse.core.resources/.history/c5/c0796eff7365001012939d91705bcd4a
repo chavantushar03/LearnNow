@@ -1,0 +1,45 @@
+package com.learnnow.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.learnnow.dao.UserEntityDao;
+import com.learnnow.dto.AuthRequest;
+import com.learnnow.dto.AuthResp;
+import com.learnnow.dto.LoginRequestDTO;
+import com.learnnow.dto.LoginResponseDTO;
+import com.learnnow.pojo.UserEntity;
+import com.learnnow.security.JwtUtils;
+
+@Service
+public class AuthService {
+
+    @Autowired
+    private UserEntityDao userEntityDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtUtils jwtUtils;
+
+    public LoginResponseDTO login(LoginRequestDTO request) {
+        UserEntity user = userEntityDao.findByEmailAndIsActiveTrue(request.getEmail())
+                .orElseThrow(() -> new BadCredentialsException("Invalid email"));
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new BadCredentialsException("Invalid password");
+        }
+
+        String token = jwtUtils.generateToken(user.getEmail(), user.getUserRole());
+       
+        LoginResponseDTO response = new LoginResponseDTO();
+        response.setToken(token);
+        response.setEmail(user.getEmail());
+        response.setMessage("Login successful");
+
+        return response;
+    }
+}
