@@ -16,6 +16,7 @@ export async function insertData(firstName, lastName, email, password, dob, user
             console.error("Registration error:", error.response?.data || error.message);
             return { status: "error", message: error.response?.data?.message || "Something went wrong" };
     }
+<<<<<<< HEAD
 }
 
 // Login user
@@ -34,3 +35,6 @@ export async function loginUser(email, password) {
   }
 }
 
+=======
+}
+>>>>>>> abhishek

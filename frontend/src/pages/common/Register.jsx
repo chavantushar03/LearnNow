@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
+<<<<<<< HEAD
 import { Link, useNavigate } from 'react-router-dom'
+=======
+import { useNavigate } from 'react-router-dom'
+>>>>>>> abhishek
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import { insertData } from '../../services/userServices';
@@ -123,12 +127,17 @@ function Register() {
           <option value="TEACHER">Teacher</option>
         </select>
         <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">Register</button>
+<<<<<<< HEAD
         
         {error && <p className="text-red-500">{error}</p>}
       </form>
       <br></br>
         <button className="bg-green-600 text-white px-4 py-2 rounded"><Link to="/login" className="text-white">Login</Link></button>
       
+=======
+        {error && <p className="text-red-500">{error}</p>}
+      </form>
+>>>>>>> abhishek
     </div>
   )
 }

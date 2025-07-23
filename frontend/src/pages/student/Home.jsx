@@ -4,7 +4,11 @@ import Companies from '../../components/student/Companies'
 import CoursesSection from '../../components/student/CoursesSection'
 import TestimonialsSection from '../../components/student/TestimonialsSection'
 import CallToAction from '../../components/student/CallToAction'
+<<<<<<< HEAD
 import Footer from '../../components/common/Footer'
+=======
+import Footer from '../../components/student/Footer'
+>>>>>>> abhishek
 
 
 const Home = () => {
@@ -15,6 +19,10 @@ const Home = () => {
       <CoursesSection/>
       <TestimonialsSection/>
       <CallToAction/>
+<<<<<<< HEAD
+=======
+      <Footer/>
+>>>>>>> abhishek
     </div>
   )
 }

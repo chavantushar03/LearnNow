@@ -4,8 +4,13 @@ import { AppContext } from '../../context/AppContext';
 import Loading from '../../components/student/Loading';
 import { assets } from '../../assets/assets';
 import humanizeDuration from 'humanize-duration';
+<<<<<<< HEAD
 import Youtube from "react-youtube";
 import Footer from '../../components/common/Footer';
+=======
+import Footer from '../../components/student/Footer';
+import Youtube from "react-youtube";
+>>>>>>> abhishek
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -172,6 +177,11 @@ const CourseDetails = () => {
           </div>
         </div>
       </div>
+<<<<<<< HEAD
+=======
+
+      <Footer />
+>>>>>>> abhishek
     </>
   ) : <Loading />;
 };

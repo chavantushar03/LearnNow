@@ -4,7 +4,11 @@ import SearchBar from '../../components/student/SearchBar'
 import { useParams } from 'react-router-dom'
 import CourseCard from '../../components/student/CourseCard'
 import { assets } from '../../assets/assets'
+<<<<<<< HEAD
 import Footer from '../../components/common/Footer'
+=======
+import Footer from '../../components/student/Footer'
+>>>>>>> abhishek
 
 const CoursesList = () => {
   const { navigate, allCourses } = useContext(AppContext)
@@ -65,6 +69,10 @@ const CoursesList = () => {
           ))}
         </div>
       </div>
+<<<<<<< HEAD
+=======
+      <Footer />
+>>>>>>> abhishek
     </>
   )
 }

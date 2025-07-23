@@ -4,6 +4,10 @@ import { useParams } from 'react-router-dom';
 import { assets } from '../../assets/assets';
 import humanizeDuration from 'humanize-duration';
 import YouTube from 'react-youtube';
+<<<<<<< HEAD
+=======
+import Footer from '../../components/student/Footer';
+>>>>>>> abhishek
 import Rating from '../../components/student/Rating';
 
 const Player = () => {
@@ -196,6 +200,10 @@ const Player = () => {
         </div>
       </div>
 
+<<<<<<< HEAD
+=======
+      <Footer />
+>>>>>>> abhishek
     </>
   );
 };
