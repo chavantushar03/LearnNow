@@ -1,0 +1,10 @@
+package com.learnnow.utils;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class JwtUtils {
+	@value("${jwt.secret}")
+    private String jwtSecret;
+	
+}

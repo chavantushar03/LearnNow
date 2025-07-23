@@ -1,0 +1,5 @@
+package com.learnnow.service;
+
+public class CustomUserDetailsService {
+
+}
